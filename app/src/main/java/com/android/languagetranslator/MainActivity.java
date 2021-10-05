@@ -1,5 +1,4 @@
 package com.android.languagetranslator;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +15,9 @@ import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguage;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOptions;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+
 import java.util.ArrayList;
 import java.util.Locale;
 @SuppressWarnings("ALL")
@@ -33,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseRemoteConfigSettings settings = new FirebaseRemoteConfigSettings.Builder().build();
+        FirebaseRemoteConfig firebaseRemoteConfig=FirebaseRemoteConfig.getInstance();
+        firebaseRemoteConfig.setConfigSettingsAsync(settings);
+
+
+
         Spinner start_language = findViewById(R.id.start_language);
         Spinner target_language = findViewById(R.id.to_language);
         editText=findViewById(R.id.source);
@@ -86,14 +95,16 @@ public class MainActivity extends AppCompatActivity {
             else if (to_language_code==0){
                 Toast.makeText(MainActivity.this, "Please select target language", Toast.LENGTH_SHORT).show();
             }
+            else if(from_language_code == to_language_code){
+                Toast.makeText(MainActivity.this, "Same language can not be translated!", Toast.LENGTH_SHORT).show();
+            }
             else{
                 Translate_language(from_language_code,to_language_code,editText.getText().toString());
             }
         });
     }
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==REQUEST_PERMISSION_CODE){
             if (resultCode==RESULT_OK && data != null){
@@ -102,13 +113,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    private void Translate_language(int from_language_code, int to_language_code, String text) {
+    private void Translate_language(int l1, int l2, String text) {
         result.setText("Downloading Model...");
         FirebaseTranslatorOptions options=new FirebaseTranslatorOptions.Builder()
-                .setSourceLanguage(from_language_code)
-                .setTargetLanguage(to_language_code)
+                .setSourceLanguage(l1)
+                .setTargetLanguage(l2)
                 .build();
-        FirebaseTranslator translator = FirebaseNaturalLanguage.getInstance().getTranslator(options);
+        final FirebaseTranslator translator = FirebaseNaturalLanguage.getInstance().getTranslator(options);
             FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder().build();
             translator.downloadModelIfNeeded(conditions).addOnSuccessListener(unused -> {
                 result.setText("Translating language...");
