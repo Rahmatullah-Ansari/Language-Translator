@@ -1,9 +1,6 @@
 package com.android.languagetranslator;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -14,41 +11,35 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.common.modeldownload.FirebaseModelDownloadConditions;
 import com.google.firebase.ml.naturallanguage.FirebaseNaturalLanguage;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguage;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOptions;
-
 import java.util.ArrayList;
 import java.util.Locale;
-
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity {
-    private Spinner Start_language,target_language;
     private com.google.android.material.textfield.TextInputEditText editText;
-    private ImageView microphone;
-    private com.google.android.material.button.MaterialButton translate;
     private TextView result;
-    private String[] language_1={"From","English","Afrikaans","Arabic","Belarusian","Bulgarian","Bengali","Catalan","Czech","Welsh",
+    private final String[] language_1={"From","English","Afrikaans","Arabic","Belarusian","Bulgarian","Bengali","Catalan","Czech","Welsh",
     "Hindi","Urdu"};
-    private String[] language_2={"To","English","Afrikaans","Arabic","Belarusian","Bulgarian","Bengali","Catalan","Czech","Welsh",
+    private final String[] language_2={"To","English","Afrikaans","Arabic","Belarusian","Bulgarian","Bengali","Catalan","Czech","Welsh",
             "Hindi","Urdu"};
     private static final int REQUEST_PERMISSION_CODE=123;
-    private int language_code,from_language_code,to_language_code=0;
+    private int from_language_code=0;
+    private int to_language_code=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Start_language=findViewById(R.id.start_language);
-        target_language=findViewById(R.id.to_language);
+        Spinner start_language = findViewById(R.id.start_language);
+        Spinner target_language = findViewById(R.id.to_language);
         editText=findViewById(R.id.source);
-        microphone=findViewById(R.id.microphone);
-        translate=findViewById(R.id.translate_language);
+        ImageView microphone = findViewById(R.id.microphone);
+        com.google.android.material.button.MaterialButton translate = findViewById(R.id.translate_language);
         result=findViewById(R.id.translated_text);
-        Start_language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        start_language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 from_language_code=get_language_code(language_1[i]);
@@ -60,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
         });
         ArrayAdapter fromAdapter=new ArrayAdapter(this, android.R.layout.simple_list_item_1,language_1);
         fromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Start_language.setAdapter(fromAdapter);
+        start_language.setAdapter(fromAdapter);
         target_language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                from_language_code=get_language_code(language_1[i]);
+                to_language_code=get_language_code(language_2[i]);
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -117,21 +108,12 @@ public class MainActivity extends AppCompatActivity {
                 .setSourceLanguage(from_language_code)
                 .setTargetLanguage(to_language_code)
                 .build();
-        FirebaseTranslator translator= FirebaseNaturalLanguage.getInstance()
-                .getTranslator(options);
-        FirebaseModelDownloadConditions conditions=new FirebaseModelDownloadConditions.Builder().build();
-        translator.downloadModelIfNeeded(conditions).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
+        FirebaseTranslator translator = FirebaseNaturalLanguage.getInstance().getTranslator(options);
+            FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder().build();
+            translator.downloadModelIfNeeded(conditions).addOnSuccessListener(unused -> {
                 result.setText("Translating language...");
-                translator.translate(text).addOnSuccessListener(new OnSuccessListener<String>() {
-                    @Override
-                    public void onSuccess(String s) {
-                        result.setText(s);
-                    }
-                }).addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Error due to : - "+e.getMessage(), Toast.LENGTH_SHORT).show());
-            }
-        }).addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Can not able to download due to :- "+e.getMessage(), Toast.LENGTH_SHORT).show());
+                translator.translate(text).addOnSuccessListener(s -> result.setText(s)).addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Error due to : - " + e.getMessage(), Toast.LENGTH_SHORT).show());
+            }).addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Can not able to download due to :- " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     private int get_language_code(String s) {

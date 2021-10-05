@@ -37,9 +37,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation platform('com.google.firebase:firebase-bom:28.4.1')
     implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-core:19.0.1'
-    implementation 'com.google.firebase:firebase-ml-natural-language:22.0.1'
-    implementation 'com.google.firebase:firebase-ml-natural-language-id-model:20.0.7'
-    implementation 'com.google.firebase:firebase-ml-natural-language-translate-model:20.0.9'
+    implementation 'com.google.firebase:firebase-core:17.3.0'
+    implementation 'com.google.firebase:firebase-ml-natural-language:22.0.0'
+    implementation 'com.google.firebase:firebase-ml-natural-language-language-id-model:20.0.7'
+    implementation 'com.google.firebase:firebase-ml-natural-language-translate-model:20.0.8'
 }
 apply plugin: 'com.google.gms.google-services'
