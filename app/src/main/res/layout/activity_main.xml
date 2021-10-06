@@ -133,7 +133,7 @@
         android:layout_marginTop="10dp"
         android:id="@+id/translated_text"
         android:padding="5dp"
-        android:textIsSelectable="true"
+        android:textIsSelectable="false"
         android:textColor="@color/yellow"
         android:gravity="center"
         tools:ignore="HardcodedText" />

@@ -1,9 +1,14 @@
 package com.android.languagetranslator;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,13 +18,19 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.mlkit.common.model.DownloadConditions;
+import com.google.mlkit.common.model.RemoteModelManager;
 import com.google.mlkit.nl.translate.TranslateLanguage;
+import com.google.mlkit.nl.translate.TranslateRemoteModel;
 import com.google.mlkit.nl.translate.Translation;
 import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Set;
+
 @SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity {
     private com.google.android.material.textfield.TextInputEditText editText;
@@ -31,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_PERMISSION_CODE=123;
     private String from_language_code=null;
     private String to_language_code=null;
+    private androidx.recyclerview.widget.RecyclerView recyclerView;
+    private ArrayList<Holder> arrayList;
+    private Adapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,10 +121,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void Translate_language(String l1, String l2, String text) {
+        result.setTextIsSelectable(false);
         result.setText("Downloading Model...");
         TranslatorOptions options=new TranslatorOptions.Builder()
-                .setSourceLanguage(String.valueOf(l1))
-                .setTargetLanguage(String.valueOf(l2))
+                .setSourceLanguage(l1)
+                .setTargetLanguage(l2)
                 .build();
         final Translator translator = Translation.getClient(options);
             DownloadConditions conditions = new DownloadConditions.Builder().build();
@@ -119,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 translator.translate(text).addOnSuccessListener(s -> {
                     result.setText(s);
                     translator.close();
+                    result.setTextIsSelectable(true);
                 }).addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Error due to : - " + e.getMessage(), Toast.LENGTH_SHORT).show());
             }).addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Can not able to download due to :- " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
@@ -191,8 +207,42 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-
     private void getdownloadedModel() {
+        RemoteModelManager modelManager = RemoteModelManager.getInstance();
+        modelManager.getDownloadedModels(TranslateRemoteModel.class)
+                .addOnSuccessListener(new OnSuccessListener<Set<TranslateRemoteModel>>() {
+                    @Override
+                    public void onSuccess(Set<TranslateRemoteModel> models) {
+                        for (TranslateRemoteModel t:models){
+                            Toast.makeText(MainActivity.this, "Model = "+t.getModelName()+"\n Language = "+t.getLanguage(), Toast.LENGTH_LONG).show();
+                            break;
+                        }
+                        showModels();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivity.this, "Unable to get model due to : -"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
+    private void showModels() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        View view= LayoutInflater.from(MainActivity.this).inflate(R.layout.models,null);
+        builder.setView(view);
+        builder.show();
+        recyclerView=view.findViewById(R.id.model_item_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        arrayList=new ArrayList<>();
+        adapter=new Adapter(MainActivity.this,arrayList);
+        recyclerView.setAdapter(adapter);
     }
 }
