@@ -3,7 +3,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -49,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        arrayList=new ArrayList<>();
+        adapter=new Adapter(MainActivity.this,arrayList);
         Spinner start_language = findViewById(R.id.start_language);
         Spinner target_language = findViewById(R.id.to_language);
         editText=findViewById(R.id.source);
@@ -213,10 +214,12 @@ public class MainActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Set<TranslateRemoteModel>>() {
                     @Override
                     public void onSuccess(Set<TranslateRemoteModel> models) {
+                        arrayList.clear();
                         for (TranslateRemoteModel t:models){
-                            Toast.makeText(MainActivity.this, "Model = "+t.getModelName()+"\n Language = "+t.getLanguage(), Toast.LENGTH_LONG).show();
-                            break;
+                            Holder holder=new Holder(t.getLanguage());
+                            arrayList.add(holder);
                         }
+                        adapter.notifyDataSetChanged();
                         showModels();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -226,7 +229,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void showModels() {
         AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -241,8 +243,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView=view.findViewById(R.id.model_item_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-        arrayList=new ArrayList<>();
-        adapter=new Adapter(MainActivity.this,arrayList);
         recyclerView.setAdapter(adapter);
     }
 }
