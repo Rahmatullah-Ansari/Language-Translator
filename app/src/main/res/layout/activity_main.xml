@@ -19,7 +19,8 @@
         android:textStyle="bold"
         android:gravity="center"
         android:textColor="@color/yellow"
-        android:padding="5dp"/>
+        android:padding="5dp"
+        tools:ignore="HardcodedText" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,7 +67,8 @@
         android:hint="Source text"
         android:padding="5dp"
         app:hintTextColor="@color/white"
-        android:textColorHint="@color/white">
+        android:textColorHint="@color/white"
+        tools:ignore="HardcodedText">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -89,7 +91,8 @@
         android:padding="5dp"
         android:text="OR"
         android:layout_marginTop="10dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        tools:ignore="HardcodedText" />
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -108,7 +111,7 @@
         android:padding="5dp"
         android:text="Say Something"
         android:gravity="center"
-        />
+        tools:ignore="HardcodedText" />
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,7 +121,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:textSize="20sp"
-        android:id="@+id/translate_language"/>
+        android:id="@+id/translate_language"
+        tools:ignore="HardcodedText" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -129,7 +133,8 @@
         android:layout_marginTop="10dp"
         android:id="@+id/translated_text"
         android:padding="5dp"
+        android:textIsSelectable="true"
         android:textColor="@color/yellow"
         android:gravity="center"
-        />
+        tools:ignore="HardcodedText" />
 </LinearLayout>

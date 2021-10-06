@@ -1,8 +1,11 @@
 package com.android.languagetranslator;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,7 +18,6 @@ import com.google.mlkit.nl.translate.TranslateLanguage;
 import com.google.mlkit.nl.translate.Translation;
 import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
-
 import java.util.ArrayList;
 import java.util.Locale;
 @SuppressWarnings("ALL")
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        ArrayAdapter fromAdapter=new ArrayAdapter(this, android.R.layout.simple_list_item_1,language_1);
+        ArrayAdapter fromAdapter=new ArrayAdapter(this,R.layout.spinner_item,language_1);
         fromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         start_language.setAdapter(fromAdapter);
         target_language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        ArrayAdapter toAdapter=new ArrayAdapter(this, android.R.layout.simple_list_item_1,language_2);
+        ArrayAdapter toAdapter=new ArrayAdapter(this, R.layout.spinner_item,language_2);
         toAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         target_language.setAdapter(toAdapter);
         microphone.setOnClickListener(view -> {
@@ -161,5 +163,36 @@ public class MainActivity extends AppCompatActivity {
                 languageCode=null;
         }
         return languageCode;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.option,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.share_result:
+                if (!result.getText().toString().isEmpty()){
+                    Intent intent=new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT,result.getText().toString());
+                    startActivity(Intent.createChooser(intent,"Share Via"));
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Nothing to share!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.manage_model:
+                getdownloadedModel();
+                break;
+        }
+        return true;
+    }
+
+    private void getdownloadedModel() {
+
     }
 }
