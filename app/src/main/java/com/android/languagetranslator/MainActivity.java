@@ -142,14 +142,16 @@ public class MainActivity extends AppCompatActivity {
                     result.setText(s);
                     translator.close();
                     result.setTextIsSelectable(true);
-                }).addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Error due to : - " + e.getMessage(), Toast.LENGTH_SHORT).show());
-            }).addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Can not able to download due to :- " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> {
+                    result.setText("Result");
+                    Toast.makeText(MainActivity.this, "Error due to : - " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            }).addOnFailureListener(e -> {
+                result.setText("Result");
+                Toast.makeText(MainActivity.this, "Can not able to download due to :- " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            );
     }
-//private final String[] language_1={"From","English","Afrikaans","Arabic","Belarusian","Bulgarian","Bengali","Catalan","Czech","Chinese",
-//    "Hindi","Urdu","French","Slovenian","Albanian","Croatian","Danish","Dutch","Esperanto","Finnish","Galician","Georgian","German","Greek",
-//            "Gujarati","Haitian_creole","Hebrew","Hungarian","Icelandic","Indonesian","Irish","Italian","Japanese","Kannada","Korean","Latvian",
-//            "Lithuanian","Macedonian","Malay","Maltese","Marathi","Norwegian","Persian","Polish","Portuguese","Romanian","Russian","Slovak","Spanish",
-//            "Swahili","Swedish","Tagalog","Tamil","Telugu","Thai","Turkish","Ukrainian","Vietnamese","Welsh"};
     private String get_language_code(String s) {
         String languageCode=null;
         switch (s){
@@ -381,19 +383,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void showModels() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        View view= LayoutInflater.from(MainActivity.this).inflate(R.layout.models,null);
-        builder.setView(view);
-        builder.show();
-        recyclerView=view.findViewById(R.id.model_item_recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-        recyclerView.setAdapter(adapter);
+        if (arrayList.size() <= 0){
+            Toast.makeText(MainActivity.this, "No model available!", Toast.LENGTH_SHORT).show();
+        }else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.models, null);
+            builder.setView(view);
+            builder.show();
+            recyclerView = view.findViewById(R.id.model_item_recycler_view);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+            recyclerView.setAdapter(adapter);
+        }
     }
 }
