@@ -295,101 +295,95 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
                 case "Icelandic":
                     deleteModel(TranslateLanguage.ICELANDIC, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Indonesian":
+                    deleteModel(TranslateLanguage.INDONESIAN, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Irish":
+                    deleteModel(TranslateLanguage.IRISH, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Italian":
+                    deleteModel(TranslateLanguage.ITALIAN, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Japanese":
+                    deleteModel(TranslateLanguage.JAPANESE, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Kannada":
+                    deleteModel(TranslateLanguage.KANNADA, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Korean":
+                    deleteModel(TranslateLanguage.KOREAN, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Latvian":
+                    deleteModel(TranslateLanguage.LATVIAN, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Lithuanian":
+                    deleteModel(TranslateLanguage.LITHUANIAN, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Macedonian":
+                    deleteModel(TranslateLanguage.MACEDONIAN, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Malay":
+                    deleteModel(TranslateLanguage.MALAY, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Maltese":
+                    deleteModel(TranslateLanguage.MALTESE, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Marathi":
+                    deleteModel(TranslateLanguage.MARATHI, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Norwegian":
+                    deleteModel(TranslateLanguage.NORWEGIAN, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Persian":
+                    deleteModel(TranslateLanguage.PERSIAN, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Polish":
+                    deleteModel(TranslateLanguage.POLISH, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Portuguese":
+                    deleteModel(TranslateLanguage.PORTUGUESE, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Romanian":
+                    deleteModel(TranslateLanguage.ROMANIAN, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Russian":
+                    deleteModel(TranslateLanguage.RUSSIAN, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Slovak":
+                    deleteModel(TranslateLanguage.SLOVAK, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Spanish":
+                    deleteModel(TranslateLanguage.SPANISH, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Swahili":
+                    deleteModel(TranslateLanguage.SWAHILI, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Swedish":
+                    deleteModel(TranslateLanguage.SWEDISH, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Tagalog":
+                    deleteModel(TranslateLanguage.TAGALOG, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Tamil":
+                    deleteModel(TranslateLanguage.TAMIL, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Telugu":
+                    deleteModel(TranslateLanguage.TELUGU, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Thai":
+                    deleteModel(TranslateLanguage.THAI, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Turkish":
+                    deleteModel(TranslateLanguage.TURKISH, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Ukrainian":
+                    deleteModel(TranslateLanguage.UKRAINIAN, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Vietnamese":
+                    deleteModel(TranslateLanguage.VIETNAMESE, position);
                     break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
-                    break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
-                    break;
-                case "Hindi":
-                    deleteModel(TranslateLanguage.HINDI, position);
+                case "Welsh":
+                    deleteModel(TranslateLanguage.WELSH, position);
                     break;
             }
         });
