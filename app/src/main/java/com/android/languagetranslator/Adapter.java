@@ -385,6 +385,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
                 case "Welsh":
                     deleteModel(TranslateLanguage.WELSH, position);
                     break;
+                case "English":
+                    deleteModel(TranslateLanguage.ENGLISH, position);
+                    break;
             }
         });
     }

@@ -34,10 +34,16 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
     private com.google.android.material.textfield.TextInputEditText editText;
     private TextView result;
-    private final String[] language_1={"From","English","Afrikaans","Arabic","Belarusian","Bulgarian","Bengali","Catalan","Czech","Chinees",
-    "Hindi","Urdu"};
-    private final String[] language_2={"To","English","Afrikaans","Arabic","Belarusian","Bulgarian","Bengali","Catalan","Czech","Chinees",
-            "Hindi","Urdu"};
+    private final String[] language_1={"From","English","Afrikaans","Arabic","Belarusian","Bulgarian","Bengali","Catalan","Czech","Chinese",
+    "Hindi","Urdu","French","Slovenian","Albanian","Croatian","Danish","Dutch","Esperanto","Finnish","Galician","Georgian","German","Greek",
+            "Gujarati","Haitian_creole","Hebrew","Hungarian","Icelandic","Indonesian","Irish","Italian","Japanese","Kannada","Korean","Latvian",
+            "Lithuanian","Macedonian","Malay","Maltese","Marathi","Norwegian","Persian","Polish","Portuguese","Romanian","Russian","Slovak","Spanish",
+            "Swahili","Swedish","Tagalog","Tamil","Telugu","Thai","Turkish","Ukrainian","Vietnamese","Welsh"};
+    private final String[] language_2={"From","English","Afrikaans","Arabic","Belarusian","Bulgarian","Bengali","Catalan","Czech","Chinese",
+            "Hindi","Urdu","French","Slovenian","Albanian","Croatian","Danish","Dutch","Esperanto","Finnish","Galician","Georgian","German","Greek",
+            "Gujarati","Haitian_creole","Hebrew","Hungarian","Icelandic","Indonesian","Irish","Italian","Japanese","Kannada","Korean","Latvian",
+            "Lithuanian","Macedonian","Malay","Maltese","Marathi","Norwegian","Persian","Polish","Portuguese","Romanian","Russian","Slovak","Spanish",
+            "Swahili","Swedish","Tagalog","Tamil","Telugu","Thai","Turkish","Ukrainian","Vietnamese","Welsh"};
     private static final int REQUEST_PERMISSION_CODE=123;
     private String from_language_code=null;
     private String to_language_code=null;
@@ -139,7 +145,11 @@ public class MainActivity extends AppCompatActivity {
                 }).addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Error due to : - " + e.getMessage(), Toast.LENGTH_SHORT).show());
             }).addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Can not able to download due to :- " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
-
+//private final String[] language_1={"From","English","Afrikaans","Arabic","Belarusian","Bulgarian","Bengali","Catalan","Czech","Chinese",
+//    "Hindi","Urdu","French","Slovenian","Albanian","Croatian","Danish","Dutch","Esperanto","Finnish","Galician","Georgian","German","Greek",
+//            "Gujarati","Haitian_creole","Hebrew","Hungarian","Icelandic","Indonesian","Irish","Italian","Japanese","Kannada","Korean","Latvian",
+//            "Lithuanian","Macedonian","Malay","Maltese","Marathi","Norwegian","Persian","Polish","Portuguese","Romanian","Russian","Slovak","Spanish",
+//            "Swahili","Swedish","Tagalog","Tamil","Telugu","Thai","Turkish","Ukrainian","Vietnamese","Welsh"};
     private String get_language_code(String s) {
         String languageCode=null;
         switch (s){
@@ -167,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 case "Czech":
                 languageCode= TranslateLanguage.CZECH;
                 break;
-                case "Chinees":
+                case "Chinese":
                 languageCode= TranslateLanguage.CHINESE;
                 break;
                 case "Hindi":
@@ -175,6 +185,147 @@ public class MainActivity extends AppCompatActivity {
                 break;
                 case "Urdu":
                 languageCode= TranslateLanguage.URDU;
+                break;
+            case "French":
+                languageCode= TranslateLanguage.FRENCH;
+                break;
+            case "Slovenian":
+                languageCode= TranslateLanguage.SLOVENIAN;
+                break;
+            case "Albanian":
+                languageCode= TranslateLanguage.ALBANIAN;
+                break;
+            case "Croatian":
+                languageCode= TranslateLanguage.CROATIAN;
+                break;
+            case "Danish":
+                languageCode= TranslateLanguage.DANISH;
+                break;
+            case "Dutch":
+                languageCode= TranslateLanguage.DUTCH;
+                break;
+            case "Esperanto":
+                languageCode= TranslateLanguage.ESPERANTO;
+                break;
+            case "Finnish":
+                languageCode= TranslateLanguage.FINNISH;
+                break;
+            case "Galician":
+                languageCode= TranslateLanguage.GALICIAN;
+                break;
+            case "Georgian":
+                languageCode= TranslateLanguage.GEORGIAN;
+                break;
+            case "German":
+                languageCode= TranslateLanguage.GERMAN;
+                break;
+            case "Greek":
+                languageCode= TranslateLanguage.GREEK;
+                break;
+            case "Gujarati":
+                languageCode= TranslateLanguage.GUJARATI;
+                break;
+            case "Haitian_creole":
+                languageCode= TranslateLanguage.HAITIAN_CREOLE;
+                break;
+            case "Hebrew":
+                languageCode= TranslateLanguage.HEBREW;
+                break;
+            case "Hungarian":
+                languageCode= TranslateLanguage.HUNGARIAN;
+                break;
+            case "Icelandic":
+                languageCode= TranslateLanguage.ICELANDIC;
+                break;
+            case "Indonesian":
+                languageCode= TranslateLanguage.INDONESIAN;
+                break;
+            case "Irish":
+                languageCode= TranslateLanguage.IRISH;
+                break;
+            case "Italian":
+                languageCode= TranslateLanguage.ITALIAN;
+                break;
+            case "Japanese":
+                languageCode= TranslateLanguage.JAPANESE;
+                break;
+            case "Kannada":
+                languageCode= TranslateLanguage.KANNADA;
+                break;
+            case "Korean":
+                languageCode= TranslateLanguage.KOREAN;
+                break;
+            case "Latvian":
+                languageCode= TranslateLanguage.LATVIAN;
+                break;
+            case "Lithuanian":
+                languageCode= TranslateLanguage.LITHUANIAN;
+                break;
+            case "Macedonian":
+                languageCode= TranslateLanguage.MACEDONIAN;
+                break;
+            case "Malay":
+                languageCode= TranslateLanguage.MALAY;
+                break;
+            case "Maltese":
+                languageCode= TranslateLanguage.MALTESE;
+                break;
+            case "Marathi":
+                languageCode= TranslateLanguage.MARATHI;
+                break;
+            case "Norwegian":
+                languageCode= TranslateLanguage.NORWEGIAN;
+                break;
+            case "Persian":
+                languageCode= TranslateLanguage.PERSIAN;
+                break;
+            case "Polish":
+                languageCode= TranslateLanguage.POLISH;
+                break;
+            case "Portuguese":
+                languageCode= TranslateLanguage.PORTUGUESE;
+                break;
+            case "Romanian":
+                languageCode= TranslateLanguage.ROMANIAN;
+                break;
+            case "Russian":
+                languageCode= TranslateLanguage.RUSSIAN;
+                break;
+            case "Slovak":
+                languageCode= TranslateLanguage.SLOVAK;
+                break;
+            case "Spanish":
+                languageCode= TranslateLanguage.SPANISH;
+                break;
+            case "Swahili":
+                languageCode= TranslateLanguage.SWAHILI;
+                break;
+            case "Swedish":
+                languageCode= TranslateLanguage.SWEDISH;
+                break;
+            case "Tagalog":
+                languageCode= TranslateLanguage.TAGALOG;
+                break;
+            case "Tamil":
+                languageCode= TranslateLanguage.TAMIL;
+                break;
+            case "Telugu":
+                languageCode= TranslateLanguage.TELUGU;
+                break;
+            case "Thai":
+                languageCode= TranslateLanguage.THAI;
+                break;
+            case "Turkish":
+                languageCode= TranslateLanguage.TURKISH;
+                break;
+            case "Ukrainian":
+                languageCode= TranslateLanguage.UKRAINIAN;
+                break;
+            case "Vietnamese":
+                languageCode= TranslateLanguage.VIETNAMESE;
+                break;
+            case "Welsh":
+                languageCode= TranslateLanguage.WELSH;
                 break;
             default:
                 languageCode=null;
