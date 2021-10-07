@@ -395,9 +395,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
                     Toast.makeText(context, "Deleted successfully!", Toast.LENGTH_SHORT).show();
                     arrayList.remove(pos);
                     notifyDataSetChanged();
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(context, "Unable to delete due to : -"+e.getMessage(), Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> Toast.makeText(context, "Unable to delete due to : -"+e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     @Override

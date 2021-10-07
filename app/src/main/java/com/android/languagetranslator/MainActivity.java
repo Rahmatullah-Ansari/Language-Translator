@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.share_result:
-                if (!result.getText().toString().isEmpty()){
+                if (!result.getText().toString().isEmpty() || !result.getText().toString().equals("Result") || !result.getText().toString().equals("Downloading Model...") || !result.getText().toString().equals("Translating language...")){
                     Intent intent=new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
                     intent.putExtra(Intent.EXTRA_TEXT,result.getText().toString());
