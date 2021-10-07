@@ -383,7 +383,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void showModels() {
-        if (arrayList.size() <= 0){
+        if (arrayList.size() <= 1){
             Toast.makeText(MainActivity.this, "No model available!", Toast.LENGTH_SHORT).show();
         }else {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);

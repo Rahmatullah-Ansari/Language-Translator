@@ -42,9 +42,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
             case "hi":
                 holder.Name.setText("Hindi");
                 break;
-            case "en":
-                holder.Name.setText("English");
-                break;
             case "bn":
                 holder.Name.setText("Bengali");
                 break;
@@ -384,9 +381,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
                     break;
                 case "Welsh":
                     deleteModel(TranslateLanguage.WELSH, position);
-                    break;
-                case "English":
-                    deleteModel(TranslateLanguage.ENGLISH, position);
                     break;
             }
         });
